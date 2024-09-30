@@ -1,5 +1,5 @@
 // Import CSS reset to ensure consistent styling across browsers
-@use '../../node_modules/scss-reset/src/scss/_reset.scss';
+@use "../../node_modules/scss-reset/src/scss/_reset.scss";
 // Import custom mixins and variables
 @import "./mixins";
 @import "./variables";
@@ -27,7 +27,7 @@ body {
 
 // Main app container styles
 .App {
-  background: url(./images/bg-desktop-light.jpg) no-repeat center top;
+  background: url(../../images/bg-desktop-light.jpg) no-repeat center top;
   background-size: 100% auto;
   display: flex;
   flex-direction: column;
@@ -38,7 +38,7 @@ body {
 
   // Dark mode styles
   &--isDark {
-    background: url(./images/bg-desktop-dark.jpg) no-repeat center top;
+    background: url(../../images/bg-desktop-dark.jpg) no-repeat center top;
     background-size: 100% auto;
     @include dark-theme-variables;
   }
@@ -155,7 +155,7 @@ body {
     flex-direction: column;
     margin-top: calc(var(--default-padding) * 2);
     background-color: var(--color-input);
-    border-radius: 0.8rem;
+    border-radius: 0.7rem 0.7rem 0 0;
     overflow: hidden;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   }
