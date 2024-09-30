@@ -1,0 +1,43 @@
+@import "./variables";
+
+@mixin activeLink {
+  color: var(--color-link);
+  text-shadow: 0 0 2px var(--color-blue);
+}
+
+@mixin button {
+  width: 2.2rem;
+  height: 2.2rem;
+  background: transparent;
+  border: 0.2rem solid var(--color-theme-dark-grayish-blue);
+  border-radius: 50%;
+  text-align: center;
+  line-height: -1rem;
+  margin: auto calc(var(--default-padding) * 1.5);
+  cursor: pointer;
+  transition: all var(--timing-animation);
+
+  &:hover {
+    box-shadow: 0 0 0.2rem rgba(black, 0.5);
+    border: 0.2rem solid transparent;
+
+    background: linear-gradient(
+        to right,
+        var(--color-input),
+        var(--color-input)
+      ),
+      linear-gradient(120deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+    background-clip: padding-box, border-box;
+    background-origin: border-box;
+  }
+}
+
+@mixin dark-theme-variables {
+  --color-bg: var(--color-bg-dark-theme);
+  --color-input: var(--color-input-dark-theme);
+  --color-text: var(--color-text-dark-theme);
+  --color-task-hover: var(--color-input-dark-theme);
+  --color-theme-light-gray-blue: var(--color-theme-light-dark-gray-blue);
+  --color-link: #3cb6ff;
+  --color-gray: #adadad;
+}

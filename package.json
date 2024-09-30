@@ -1,0 +1,23 @@
+{
+  "name": "todo-app-main",
+  "version": "1.0.0",
+  "description": "The classic todo app with a few twists! This app includes a dark/light theme toggle and drag & drop reordering for anyone wanting an extra test.",
+  "main": "index.js",
+  "homepage": "https://github.com/DORMODO/todo-app-main",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "vite",
+    "build": "vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "author": "Youssef Badr",
+  "license": "ISC",
+  "dependencies": {
+    "sass": "^1.79.2",
+    "vite": "^5.4.6"
+  },
+  "devDependencies": {
+    "scss-reset": "^1.4.2"
+  }
+}

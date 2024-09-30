@@ -1,0 +1,339 @@
+// Import CSS reset to ensure consistent styling across browsers
+@use '../../node_modules/scss-reset/src/scss/_reset.scss';
+// Import custom mixins and variables
+@import "./mixins";
+@import "./variables";
+
+// Set base font size for easier rem calculations
+html {
+  font-size: 62.5%; // This makes 1rem = 10px
+}
+
+// Apply base styles to the body
+body {
+  background: var(--color-bg);
+  font-family: "Josefin Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: all var(--timing-animation);
+
+  // Change background color when app is in dark mode
+  &:has(.App--isDark) {
+    background-color: var(--color-bg-dark-theme);
+  }
+}
+
+// Main app container styles
+.App {
+  background: url(./images/bg-desktop-light.jpg) no-repeat center top;
+  background-size: 100% auto;
+  display: flex;
+  flex-direction: column;
+  font-size: var(--font-size-regular);
+  color: var(--color-text);
+  min-height: 100vh;
+  transition: background var(--timing-animation);
+
+  // Dark mode styles
+  &--isDark {
+    background: url(./images/bg-desktop-dark.jpg) no-repeat center top;
+    background-size: 100% auto;
+    @include dark-theme-variables;
+  }
+
+  // Inner wrapper for content
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 60rem;
+    width: 100%;
+    flex: 1;
+    padding: var(--default-padding);
+
+    @media (max-width: 768px) {
+      padding: var(--default-padding) calc(var(--default-padding) / 2);
+    }
+  }
+  @media (max-width: 768px) {
+    background-size: auto 23rem;
+    padding-inline: 3rem;
+  }
+}
+
+// Header styles
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--default-padding);
+
+  // Logo styles
+  .Logo {
+    color: var(--color-light-gray);
+    font-size: var(--font-size-xLarge);
+    font-weight: var(--font-weight-bold);
+    text-align: center;
+    margin-block: calc(var(--default-padding) * 2);
+    letter-spacing: 1.4rem;
+  }
+}
+
+// Dark theme toggle button styles
+.DarkThemeToggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: var(--timing-animation);
+
+  // Styles when app is in dark mode
+  .App--isDark & {
+    transform: rotate(90deg);
+  }
+
+  // Icon styles
+  &__activate,
+  &__deactivate {
+    margin-left: calc(var(--default-padding) / 4);
+    font-size: var(--font-size-small);
+  }
+
+  &__deactivate {
+    display: none;
+    .App--isDark & {
+      display: inline-block;
+    }
+  }
+
+  &__activate {
+    .App--isDark & {
+      display: none;
+    }
+  }
+}
+
+// Task search bar styles
+.TaskSearchBar {
+  margin-bottom: var(--default-padding);
+
+  &__searchContent {
+    background-color: var(--color-input);
+    display: flex;
+    height: 6.4rem;
+    cursor: text;
+    border-radius: 0.8rem;
+    padding-right: 2rem;
+  }
+
+  &__input {
+    background-color: transparent;
+    border: 0;
+    flex: 1 1 auto;
+    color: var(--color-text);
+    min-width: 4.8rem;
+    font-size: var(--font-size-large);
+    transition: background-color var(--timing-animation);
+  }
+
+  // Placeholder styles
+  ::placeholder {
+    color: hsl(236, 9%, 61%);
+    opacity: 1;
+  }
+
+  &__button {
+    @include button;
+  }
+}
+
+// Task list styles
+.task-list {
+  &__items {
+    display: flex;
+    flex-direction: column;
+    margin-top: calc(var(--default-padding) * 2);
+    background-color: var(--color-input);
+    border-radius: 0.8rem;
+    overflow: hidden;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  }
+
+  &__item {
+    background-color: var(--color-input);
+    flex: 1;
+    display: flex;
+    align-items: center;
+    transition: background-color var(--timing-animation);
+
+    &:not(:last-child) {
+      border-bottom: 0.1rem solid var(--color-theme-light-gray-blue);
+    }
+    &:hover .task-list__delete-icon {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    // Styles for completed tasks
+    &--isActive {
+      text-decoration: line-through;
+      color: var(--color-theme-light-dark-gray-blue);
+
+      .task-list__checkbox {
+        line-height: 2rem;
+
+        background: linear-gradient(
+          120deg,
+          hsl(192, 100%, 67%),
+          hsl(280, 87%, 65%)
+        );
+        background-clip: padding-box, border-box;
+        background-origin: border-box;
+        border: none;
+
+        &:hover {
+          background: linear-gradient(
+            120deg,
+            hsl(192, 100%, 67%),
+            hsl(280, 87%, 65%)
+          );
+          background-clip: padding-box, border-box;
+          background-origin: border-box;
+          border: none;
+        }
+      }
+
+      .task-list__checkbox-icon {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  // Checkbox styles
+  &__checkbox {
+    @include button;
+  }
+
+  &__checkbox-icon {
+    opacity: 0;
+    visibility: hidden;
+    user-select: none;
+    transition: all var(--timing-animation);
+  }
+
+  // Task content styles
+  &__content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    font-size: var(--font-size-large);
+  }
+
+  &__description {
+    flex: 1;
+    cursor: pointer;
+    height: 100%;
+    padding: 2.3rem 0;
+    transition: all var(--timing-animation);
+  }
+
+  // Delete icon styles
+  &__delete-icon {
+    position: absolute;
+    width: 1.6rem;
+    right: var(--default-padding);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--timing-animation);
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  // Task list info section styles
+  &__info {
+    font-size: var(--font-size-small);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0 0 0.7rem 0.7rem;
+    padding: 2.3rem 2rem;
+    color: hsl(236, 9%, 61%);
+    background-color: var(--color-input);
+    border-top: 0.1rem solid var(--color-theme-light-gray-blue);
+    border-bottom: none !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  }
+
+  // Filter buttons styles
+  &__info-filters {
+    display: flex;
+    gap: 1.4rem;
+
+    &--mobile {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      display: none;
+
+      &--mobile {
+        display: flex;
+        margin-top: var(--default-padding);
+        background-color: var(--color-input);
+        border-radius: 0.8rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        background-color: var(--color-input);
+        justify-content: center;
+        font-size: var(--font-size-large);
+        gap: 3rem;
+        padding-block: var(--default-padding);
+        transition: background-color var(--timing-animation);
+      }
+    }
+  }
+
+  &__filter-btn {
+    transition: all var(--timing-animation);
+    color: var(--color-theme-light-dark-gray-blue);
+
+    &:hover {
+      color: var(--color-text);
+    }
+
+    &.active {
+      color: var(--color-primary-blue);
+    }
+  }
+
+  // Clear completed button styles
+  &__clear-btn {
+    transition: all var(--timing-animation);
+    color: hsl(236, 9%, 61%);
+    &:hover {
+      color: var(--color-text);
+    }
+  }
+}
+
+// Empty list styles
+.emptyList {
+  text-align: center;
+  margin-bottom: 5rem;
+
+  &__img {
+    height: 25rem;
+    margin-block: 3rem;
+  }
+}
+
+.note {
+  text-align: center;
+  margin-top: calc(var(--default-padding) * 2);
+  color: var(--color-theme-dark-dark-gray-blue);
+}

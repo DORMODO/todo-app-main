@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./images/favicon.ico" />
+    <title>Todo app</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/css/main.css" />
+  </head>
+  <body>
+    <main class="App">
+      <article class="App__wrapper">
+        <header class="Header">
+          <h1 class="Logo">TODO</h1>
+          <button class="DarkThemeToggle">
+            <img
+              src="images/icon-moon.svg"
+              alt="Activate dark theme"
+              class="DarkThemeToggle__activate"
+            />
+            <img
+              src="images/icon-sun.svg"
+              alt="Deactivate dark theme"
+              class="DarkThemeToggle__deactivate"
+            />
+          </button>
+        </header>
+
+        <form class="TaskSearchBar" aria-label="Add new task">
+          <div class="TaskSearchBar__searchContent">
+            <button
+              type="submit"
+              class="TaskSearchBar__button"
+              aria-label="Add task"
+            ></button>
+            <input
+              type="text"
+              class="TaskSearchBar__input"
+              placeholder="Create a new todo..."
+              aria-label="New task input"
+            />
+          </div>
+        </form>
+
+        <div class="task-list" role="main">
+          <ul class="task-list__items" aria-label="Todo list"></ul>
+          <div class="task-list__item task-list__info">
+            <span class="task-list__info-items-left" aria-live="polite"
+              >0 items left</span
+            >
+            <div
+              class="task-list__info-filters"
+              role="group"
+              aria-label="Filter tasks"
+            >
+              <button class="task-list__filter-btn active" data-filter="all">
+                All
+              </button>
+              <button class="task-list__filter-btn" data-filter="active">
+                Active
+              </button>
+              <button class="task-list__filter-btn" data-filter="completed">
+                Completed
+              </button>
+            </div>
+            <button class="task-list__clear-btn">Clear Completed</button>
+          </div>
+
+          <div
+            class="task-list__info-filters--mobile"
+            role="group"
+            aria-label="Filter tasks"
+          >
+            <button class="task-list__filter-btn active" data-filter="all">
+              All
+            </button>
+            <button class="task-list__filter-btn" data-filter="active">
+              Active
+            </button>
+            <button class="task-list__filter-btn" data-filter="completed">
+              Completed
+            </button>
+          </div>
+        </div>
+        <p class="note">Drag and drop to reorder list</p>
+      </article>
+    </main>
+    <script src="./src/index.js" type="module"></script>
+  </body>
+</html>
