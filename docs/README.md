@@ -1,6 +1,6 @@
 # Frontend Mentor - Todo app
 
-![Design preview for the Todo app coding challenge](./assets/design/desktop-preview.jpg)
+![Design preview for the Todo app coding challenge](../design/desktop-preview.jpg)
 
 ## Welcome! 👋
 
@@ -27,5 +27,3 @@ Your users should be able to:
 - Clear all completed todos
 - Toggle light and dark mode
 - **Bonus**: Drag and drop to reorder items on the list
-
-Want some support on the challenge? [Join our community](https://www.frontendmentor.io/community) and ask questions in the **#help** channel.
